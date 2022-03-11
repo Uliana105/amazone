@@ -1,5 +1,7 @@
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.support.PageFactory;
+
 import java.time.Duration;
 import java.util.List;
 
@@ -11,7 +13,7 @@ public class Main {
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
         driver.get("https://www.amazon.com/");
 
-        MainPage mainPage = new MainPage(driver);
+        MainPage mainPage = PageFactory.initElements(driver, MainPage.class);
         mainPage.search("Java");
         SearchResultPage resultPage = new SearchResultPage(driver);
         resultPage.setCategory("Books");

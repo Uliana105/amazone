@@ -1,5 +1,7 @@
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
 
 import java.time.Duration;
 
@@ -10,24 +12,22 @@ public class MainPage {
         MainPage.driver = driver;
     }
 
-    private final By inputField = By.xpath("//input[@id=\"twotabsearchtextbox\"]");
-    private final By declineChangeLocationButton = By.xpath("(//div[@class=\"glow-toaster-content\"]//span[@class=\"a-button-inner\"])[1]");
-    private final By searchButton = By.xpath("//input[@value=\"Go\"]");
+    @FindBy(xpath = "//input[@id=\"twotabsearchtextbox\"]")
+    private WebElement inputField;
+
+    @FindBy(xpath = "//input[@value=\"Go\"]")
+    private WebElement searchButton;
 
     public void search(String text) {
-        driver.findElement(inputField).sendKeys(text);
-        driver.findElement(searchButton).click();
+        setTextInInputField(text);
+        runSearch();
     }
 
     private void setTextInInputField(String text) {
-        driver.findElement(inputField).sendKeys(text);
-    }
-
-    private void declineChangeLocation() {
-        driver.findElement(declineChangeLocationButton).click();
+        inputField.sendKeys(text);
     }
 
     private void runSearch() {
-        driver.findElement(searchButton).click();
+        searchButton.click();
     }
 }
